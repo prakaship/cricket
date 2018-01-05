@@ -161,13 +161,39 @@ public  void overs(int t1,int t2,int over,int innings,int target) {
 		  striker= nonstriker;
 		  nonstriker= temp;
 		}
+if(innings==2)
+		  {
+			  if(target<run)
+			  {
+				  System.out.println(countries.get(t1)+" wons by "+(10-wicket)+" wickets");
+			     break;
+			  }
+			  if(wicket==10 && target==run)
+			  {
+				  System.out.println("it an outstanding effect by both math is draw");
+			      break;
+		      }
+			  if(wicket==10 && target>run)
+			  {
+				  System.out.println(countries.get(t2)+" wons by "+(target-run)+" runs");
+				  break;
+			  }
+			
+	}
+		  if(wicket==10 && innings==1)
+		  {
+			  return run;
+		 }
+	
+}
+	}
 		  
 			
 	}
 	
 }
-	}
-}
+	
+
 
  
  
