@@ -141,7 +141,15 @@ public  void overs(int t1,int t2,int over,int innings,int target) {
             	run += 6;
             	break;
             case 7:
-            
+            rvalue=r.nextInt(2);
+            	if(rvalue==0)
+            		System.out.println(players[t1-1][striker] +" caught by "+players[t2-1][r.nextInt(11)]);
+            	else
+            		System.out.println(players[t1-1][striker]+" run out");
+            	wicket++;
+            	striker=next;
+            	next++;
+            	break;
             	
 		}
 			if(f%2==1 && f!=5)
