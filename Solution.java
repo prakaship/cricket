@@ -1,3 +1,4 @@
+package ph;
 import java.util.*;
 import java.io.*;
  class Game
@@ -52,7 +53,7 @@ import java.io.*;
 		System.out.println("choose any two countrys to start the match");	
 	
 	}
-   public int tosstime(int team_1,int team_2) {
+   public int tosstime(int team_1,int team_2) {// tossing 
     	 int a=r.nextInt(4);
     	 System.out.println(caption[team_1-1]+" toss with "+caption[team_2-1]);
     	 switch(a) {
@@ -69,9 +70,99 @@ import java.io.*;
     		 System.out.println(  countries.get(team_1)+" won the toss  and deciated to bowel first");
     		 break;
     	 }
-    	 return a;
+    	 return a;  // for which team bat first
     }
+
+ 
+public  void overs(int t1,int t2,int over,int innings,int target) {
+	int wicket=0,run=0,striker=0,nonstriker=1,next=2,rvalue,extras=0;
+	boolean switchflag=false;
+	System.out.println(players[t1-1][striker]+" and "+players[t1-1][nonstriker]+"coming to play");
+	
+	for(int i=0;i<over;i++)
+	{  
+		System.out.println("bowler : " +bowlers[t2-1][r.nextInt(5)]+"  "+"overs :"+(i+1)+"over");
+		System.out.println("\n");
+		for(int ball=1;ball<=6;ball++)
+		{
+			System.out.print("BALL "+ball+"\t:");
+            switchflag = false;
+			int f=r.nextInt(7);
+			
+			switch(f)
+			{
+			case 0:
+				  System.out.println(players[t1-1][striker] + " tactfully leaves the ball..");
+				  break;
+			
+			case 1:
+                System.out.println(players[t1-1][striker] + " takes a single ");
+                run+=1;
+                break;
+            case 2:
+                System.out.println(players[t1-1] [striker] + " takes a two runs ");
+                run+=2;
+                break;
+            case 3:
+                System.out.println(players[t1-1] [striker] + " take three run ");
+                run+=3;
+                break;
+            case 4:
+                System.out.println(players[t1-1] [striker] + " hits a magneficient four  ");
+                run+=4;
+                break;
+            case 5:
+            	rvalue= r.nextInt(3);
+            	
+                if (rvalue == 0) {
+                    System.out.println("Wide ball");
+                    run += 1;
+                    extras += 1;
+                    ball--;
+                }
+                else if (rvalue == 1) {
+                    System.out.println("No ball");
+                    run += 1;
+                    extras += 1;
+                    ball--;
+                } 
+                else {
+                    int bye_runs = r.nextInt(2)+1;
+                    System.out.println("Batsman take " + bye_runs + " runs as byes");
+                    if (bye_runs % 2 == 1)
+                        switchflag = true;
+                        run += bye_runs;
+                        extras += bye_runs;
+	            
+			}
+                break;
+            case 6:
+            	System.out.println(players[t1-1] [striker]+"hit a huge six");
+            	run += 6;
+            	break;
+            case 7:
+            
+            	
+		}
+			if(f%2==1 && f!=5)
+				switchflag = true;
+				
+		if(switchflag)
+		{
+		int	temp= striker;
+		  striker= nonstriker;
+		  nonstriker= temp;
+		}
+		  
+			
+	}
+	
 }
+	}
+}
+
+ 
+ 
 
 
 
@@ -104,7 +195,7 @@ public class Solution {
 			else if(team_1>c.countries.size() ||team_2>c.countries.size())
 				System.out.println("enter a valid country number");
 		}
-		int overs=Integer.parseInt(br.readLine());
+		int over=Integer.parseInt(br.readLine());
 		
 		c.displayPlayers(team_1);
 		System.out.println("\n \n");
@@ -113,6 +204,11 @@ public class Solution {
 		System.out.println("\n\n");
 		int a=c.tosstime(team_1,team_2);
 		System.out.println("\n");
+		if(a%2==0)
+			c.overs(team_1,team_2,over,0,0);
+		else 
+			c.overs(team_2,team_1,over,0,0);
 		
+			
 	}
 }
