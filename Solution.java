@@ -55,7 +55,7 @@ import java.io.*;
 	}
    public int tosstime(int team_1,int team_2) {// tossing 
     	 int a=r.nextInt(4);
-    	 System.out.println(caption[team_1-1]+" toss with "+caption[team_2-1]);
+    	 System.out.println(caption[team_1-1]+" toss with "+caption[team_2-1]+"\n");
     	 switch(a) {
     	 case 0:
     		 System.out.println(  countries.get(team_1)+" won the toss  and deciated to bat");
@@ -74,20 +74,20 @@ import java.io.*;
     }
 
  
-public  void overs(int t1,int t2,int over,int innings,int target) {
+public  int overs(int t1,int t2,int over,int innings,int target) {
 	int wicket=0,run=0,striker=0,nonstriker=1,next=2,rvalue,extras=0;
 	boolean switchflag=false;
-	System.out.println(players[t1-1][striker]+" and "+players[t1-1][nonstriker]+"coming to play");
+	System.out.println(players[t1-1][striker]+" and "+players[t1-1][nonstriker]+" coming to play\n");
 	
 	for(int i=0;i<over;i++)
 	{  
-		System.out.println("bowler : " +bowlers[t2-1][r.nextInt(5)]+"  "+"overs :"+(i+1)+"over");
+		System.out.println("bowler : " +bowlers[t2-1][r.nextInt(5)]+"  "+"overs :"+(i+1)+" over");
 		System.out.println("\n");
 		for(int ball=1;ball<=6;ball++)
 		{
 			System.out.print("BALL "+ball+"\t:");
             switchflag = false;
-			int f=r.nextInt(7);
+			int f=r.nextInt(8);
 			
 			switch(f)
 			{
@@ -141,7 +141,7 @@ public  void overs(int t1,int t2,int over,int innings,int target) {
             	run += 6;
             	break;
             case 7:
-            rvalue=r.nextInt(2);
+            	rvalue=r.nextInt(2);
             	if(rvalue==0)
             		System.out.println(players[t1-1][striker] +" caught by "+players[t2-1][r.nextInt(11)]);
             	else
@@ -152,16 +152,17 @@ public  void overs(int t1,int t2,int over,int innings,int target) {
             	break;
             	
 		}
-			if(f%2==1 && f!=5)
+			if(f%2==1 && f!=5 && f!=7)
 				switchflag = true;
-				
+			if(ball==6)
+				switchflag = true; 
 		if(switchflag)
 		{
 		int	temp= striker;
 		  striker= nonstriker;
 		  nonstriker= temp;
 		}
-if(innings==2)
+		  if(innings==2)
 		  {
 			  if(target<run)
 			  {
@@ -187,28 +188,31 @@ if(innings==2)
 	
 }
 	}
-		  
-			
-	}
-	
+	if(innings==1)
+		return run;
+	else if(innings==2) {
+	           if(target>run)
+	    	     		 System.out.println(countries.get(t2)+" wons by "+(target-run)+" runs");
+	            
+	           
+	           else if(target==run) 
+	        	   System.out.println("it an outstanding effect by both math is draw");
+	        	 
+	           
+      }
+	return 0;
 }
-	
-
+}
 
  
  
-
-
-
-
-
-
 public class Solution {
 	
 	public static void main(String []args) throws Exception{
 		
 		System.out.println("welcome to the game of cricket");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		Game c=new Game();
 		c.displayCountry();
 		int team_1;
@@ -238,11 +242,24 @@ public class Solution {
 		System.out.println("\n\n");
 		int a=c.tosstime(team_1,team_2);
 		System.out.println("\n");
-		if(a%2==0)
-			c.overs(team_1,team_2,over,0,0);
+		int l,m;
+		if(a%2==0) 
+		{
+		  l=c.overs(team_1,team_2,over,1,0);
+		  m=1;
+		}
 		else 
-			c.overs(team_2,team_1,over,0,0);
-		
+		{
+		   l=c.overs(team_2,team_1,over,1,0);
+		   m=2;
+		}
+		System.out.println("END of first innings  \n ");
+		System.out.println(c.countries.get(m)+" scored "+l+" runs ");
+		System.out.println(c.line);
+		if(m==1)
+			l=c.overs(team_2,team_1,over,2,l);
+		else
+			l=c.overs(team_1,team_2,over,2,l);
 			
 	}
 }
