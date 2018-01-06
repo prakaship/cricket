@@ -11,7 +11,7 @@ import java.io.*;
 	         {"Jason Mohammed", "Shannon Gabriel", "Chris Gayle", "Kyle Hope", "Shai Hope", "Evin Lewis", "Jason Holder(c)","Nikita Miller","Rovman Powell", "Kesrick Williams", "Sheldon Cottrell"},
 	         {"Danushka Gunathilaka","Upul Tharanga","Lahiru Thirimanne","Angelo Mathews(c)","Niroshan Dickwella","Asela Gunaratne","Thisara Perera","Sachith Pathirana","Suranga Lakmal","Akila Dananjaya","Nuwan Pradeep"},
 	 };
-	 String bowlers[][]= { {"Hardik Pandya","Axar Patel","Jasprit Bumrah","Bhuvaneshwar Kumar","Mohammed Shami"},
+	 String bowlers[][]= { {"Hardik Pandya","Axar Patel","Jasprit Bumrah","Bhuvaneshwar Kumar","Mohammed Shami"},// bowlers list of the teams
 			 {"Marcus Stoinis","Ashton Agar","Pat Cummins"," Nathan Coulter-Nile","Kane Richardson"},	
 			 {"Imran Tahir","Wayne Parnell", "Kagiso Rabada", "Rilee Rossouw", "Dale Steyn"},
 			 {"Moeen Ali","Liam Plunkett","Adil Rashid","Jake Ball","Tom Curran"},
@@ -19,10 +19,10 @@ import java.io.*;
 			 {"Angelo Mathews","Sachith Pathirana","Suranga Lakmal","Akila Dananjaya","Nuwan Pradeep"}
 			
 			 };
-	 String caption[]= {"Virat Kohli","Steven Smith","Faf du Plessis","Joe Root","Jason Holder","Angelo Mathews"};
-	public static  String line="-------------------------------";
-	void  displayPlayers(int team)
-	 {  
+	 String caption[]= {"Virat Kohli","Steven Smith","Faf du Plessis","Joe Root","Jason Holder","Angelo Mathews"};//caption listof theteams
+	 public static  String line="-------------------------------";// to print a line  for spaces 
+	 void  displayPlayers(int team)     {        //display players  of selected teams
+	 
 		System.out.println(countries.get(team)+"  players ");
 		System.out.println(line);
 		 for(int i=0;i<11;i++)
@@ -30,8 +30,8 @@ import java.io.*;
 	 }
 			 
 			 
- Game()              // teams put into hashmap
-	{
+ Game()      {        // teams put into hashmap use of constructor
+	
 		 countries.put(1,"India");
          countries.put(2,"Australia");
          countries.put(3,"South Africa");
@@ -74,24 +74,24 @@ import java.io.*;
     }
 
  
-public  int overs(int t1,int t2,int over,int innings,int target) {
-	int wicket=0,run=0,striker=0,nonstriker=1,next=2,rvalue,extras=0;
+public  int overs(int t1,int t2,int over,int innings,int target) {              // will return score for the innings
+	int wicket=0,run=0,striker=0,nonstriker=1,next=2,rvalue;
 	boolean switchflag=false;
 	System.out.println(players[t1-1][striker]+" and "+players[t1-1][nonstriker]+" coming to play\n");
 	
-	for(int i=0;i<over;i++)
-	{  
+	for(int i=0;i<over;i++) {
+	
 		System.out.println("bowler : " +bowlers[t2-1][r.nextInt(5)]+"  "+"overs :"+(i+1)+" over");
 		System.out.println("\n");
-		for(int ball=1;ball<=6;ball++)
-		{
+		for(int ball=1;ball<=6;ball++) {
+		
 			System.out.print("BALL "+ball+"\t:");
             switchflag = false;
 			int f=r.nextInt(8);
 			
-			switch(f)
-			{
-			case 0:
+			switch(f) {
+			
+			case 0: //                                dot ball
 				  System.out.println(players[t1-1][striker] + " tactfully leaves the ball..");
 				  break;
 			
@@ -111,19 +111,17 @@ public  int overs(int t1,int t2,int over,int innings,int target) {
                 System.out.println(players[t1-1] [striker] + " hits a magneficient four  ");
                 run+=4;
                 break;
-            case 5:
+            case 5:            //for extras
             	rvalue= r.nextInt(3);
             	
                 if (rvalue == 0) {
                     System.out.println("Wide ball");
                     run += 1;
-                    extras += 1;
                     ball--;
                 }
                 else if (rvalue == 1) {
                     System.out.println("No ball");
                     run += 1;
-                    extras += 1;
                     ball--;
                 } 
                 else {
@@ -132,15 +130,14 @@ public  int overs(int t1,int t2,int over,int innings,int target) {
                     if (bye_runs % 2 == 1)
                         switchflag = true;
                         run += bye_runs;
-                        extras += bye_runs;
-	            
+                                   
 			}
                 break;
             case 6:
             	System.out.println(players[t1-1] [striker]+"hit a huge six");
             	run += 6;
             	break;
-            case 7:
+            case 7: // for  wicket
             	rvalue=r.nextInt(2);
             	if(rvalue==0)
             		System.out.println(players[t1-1][striker] +" caught by "+players[t2-1][r.nextInt(11)]);
@@ -156,7 +153,7 @@ public  int overs(int t1,int t2,int over,int innings,int target) {
 				switchflag = true;
 			if(ball==6)
 				switchflag = true; 
-		if(switchflag)
+		if(switchflag)                  // at the end of over or a single or three runs swap the batmans
 		{
 		int	temp= striker;
 		  striker= nonstriker;
@@ -188,7 +185,7 @@ public  int overs(int t1,int t2,int over,int innings,int target) {
 	
 }
 	}
-	if(innings==1)
+	if(innings==1)                 //  CHECK AT THE END OF THE OVERS
 		return run;
 	else if(innings==2) {
 	           if(target>run)
@@ -217,7 +214,7 @@ public class Solution {
 		c.displayCountry();
 		int team_1;
 		int team_2;
-		while(true)
+		while(true)// getting different country checking
 		{
 			team_1=Integer.parseInt(br.readLine());
 			team_2=Integer.parseInt(br.readLine());
