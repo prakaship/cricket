@@ -43,7 +43,7 @@ import java.io.*;
 	}
     public void displayCountry()  {           // for displaying the country list
 	
-    	System.out.println("choose any two countrys to start the match");
+    	
 		Set s=countries.entrySet();
 		Iterator i=s.iterator();
 		while(i.hasNext()) {
@@ -52,7 +52,7 @@ import java.io.*;
 			System.out.println(country.getKey()+" "+country.getValue());
 		}	      
 		
-		System.out.println("choose any two countrys to start the match");	
+		System.out.println("choose any two countries(in numbers) to start the match");	
 	
 	}
    public int tosstime(int team_1,int team_2) {// tossing 
